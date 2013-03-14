@@ -31,6 +31,8 @@ import org.fusesource.jansi.Ansi;
 import com.peergreen.newsfeed.FeedMessage;
 import com.peergreen.newsfeed.Rss;
 import com.peergreen.newsfeed.RssService;
+import com.peergreen.newsfeed.RssServiceException;
+import com.peergreen.newsfeed.RssServiceNotConnectedException;
 
 /**
  * Display the report of an artifact.
@@ -64,17 +66,26 @@ public class GetNewsAction implements Action {
             this.peergreenRssURL = new URL(RSS_PEERGREEN);
             buffer.render("@|bold,underline %s|@", "Peergreen News");
             buffer.newline();
-            Rss rss = rssService.parse(peergreenRssURL);
-            Collection<FeedMessage> items = rss.getItems();
-            if (items == null) {
-                System.out.println("No items found");
-            } else {
-                for (FeedMessage feedMessage : items) {
-                    buffer.render("@|bold %s|@", feedMessage.getTitle());
-                    buffer.a(" : ");
-                    buffer.a(feedMessage.getLink());
-                    buffer.newline();
+
+            Rss rss = null;
+            try {
+                rss = rssService.parse(peergreenRssURL);
+                Collection<FeedMessage> items = rss.getItems();
+                if (items == null) {
+                    System.out.println("No items found");
+                } else {
+                    for (FeedMessage feedMessage : items) {
+                        buffer.render("@|bold %s|@", feedMessage.getTitle());
+                        buffer.a(" : ");
+                        buffer.a(feedMessage.getLink());
+                        buffer.newline();
+                    }
                 }
+            } catch (RssServiceNotConnectedException e) {
+                buffer.a("N/A: No internet connection");
+            } catch (RssServiceException e) {
+                buffer.a("Error while reading RSS stream");
+                buffer.a(e);
             }
 
             System.out.println(buffer.toString());

@@ -48,14 +48,8 @@ public class GetNewsAction implements Action {
 
     private URL peergreenRssURL;
 
-
     @Requires
     private RssService rssService;
-
-    public GetNewsAction() {
-
-    }
-
 
     public Object execute(final CommandSession session) throws Exception {
 
@@ -71,8 +65,8 @@ public class GetNewsAction implements Action {
             try {
                 rss = rssService.parse(peergreenRssURL);
                 Collection<FeedMessage> items = rss.getItems();
-                if (items == null) {
-                    System.out.println("No items found");
+                if (items == null || items.size() == 0) {
+                    System.out.println("No news");
                 } else {
                     for (FeedMessage feedMessage : items) {
                         buffer.render("@|bold %s|@", feedMessage.getTitle());

@@ -23,7 +23,7 @@
 
   <artifactId>newsfeed-commands</artifactId>
   <packaging>bundle</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
 
   <name>Peergreen Newsfeed Commands</name>
 
@@ -31,7 +31,7 @@
     <connection>scm:git:https://forge.peergreen.com/git/git/shelbie/newsfeed-commands.git</connection>
     <developerConnection>scm:git:https://forge.peergreen.com/git/git/shelbie/newsfeed-commands.git</developerConnection>
     <url>https://forge.peergreen.com/git/summary/?r=shelbie/newsfeed-commands.git</url>
-    <tag>NEWSFEED_COMMANDS_1_0_1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>

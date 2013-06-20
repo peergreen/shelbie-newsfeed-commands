@@ -64,7 +64,7 @@ public class GetNewsAction implements Action {
             Rss rss = null;
             try {
                 rss = rssService.parse(peergreenRssURL);
-                Collection<FeedMessage> items = rss.getItems();
+                Collection<FeedMessage> items = rss.getItems(5);
                 if (items == null || items.size() == 0) {
                     System.out.println("No news");
                 } else {

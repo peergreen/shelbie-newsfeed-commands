@@ -45,7 +45,7 @@
     <dependency>
       <groupId>com.peergreen.newsfeed</groupId>
       <artifactId>peergreen-newsfeed</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
     <dependency>
